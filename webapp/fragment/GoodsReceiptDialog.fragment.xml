@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="goodsReceiptDialog" title="{i18n>dialogGoodsReceipt}">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="{i18n>materialId}" required="true" />
+                    <Input value="{formModel>/goodsReceiptForm/MaterialId}" />
+                    
+                    <Label text="{i18n>plant}" required="true" />
+                    <ComboBox id="grPlantComboBox" selectedKey="{formModel>/goodsReceiptForm/Plant}" selectionChange="onChangePlant">
+                        <items>
+                            <core:Item key="DL21" text="DL21 - Dallas Manufacturing" />
+                            <core:Item key="DL00" text="DL00 - Global Bike Inc. Main" />
+                            <core:Item key="DL11" text="DL11 - 11 Global US" />
+                        </items>
+                    </ComboBox>
+                    
+                    <Label text="{i18n>storageLocation}" required="true" />
+                    <ComboBox id="grSLocComboBox" 
+                        items="{path: 'formModel>/filteredSLocs', templateShareable: false}"
+                        selectedKey="{formModel>/goodsReceiptForm/StorageLocation}">
+                        <core:Item key="{formModel>key}" text="{formModel>text}" />
+                    </ComboBox>
+                    
+                    <Label text="{i18n>quantity}" required="true" />
+                    <StepInput value="{formModel>/goodsReceiptForm/Quantity}" min="0.001" step="1" />
+                    
+                    <Label text="Ngày hạch toán" />
+                    <DatePicker value="{path: 'formModel>/goodsReceiptForm/PostingDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}" />
+                    
+                    <Label text="Ngày chứng từ" />
+                    <DatePicker value="{path: 'formModel>/goodsReceiptForm/DocumentDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}" />
+                    
+                    <Label text="Ghi chú" />
+                    <TextArea value="{formModel>/goodsReceiptForm/Remark}" rows="2" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnPost}" type="Emphasized" press="onConfirmGoodsReceipt" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnCancel}" press="onCancelGoodsReceipt" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

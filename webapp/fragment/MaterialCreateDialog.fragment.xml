@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="createMaterialDialog" title="{i18n>dialogCreateMaterial}">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="{i18n>materialId}" required="true" />
+                    <Input value="{formModel>/materialForm/MaterialId}" placeholder="VD: MAT001" />
+                    
+                    <Label text="{i18n>materialName}" required="true" />
+                    <Input value="{formModel>/materialForm/MaterialName}" placeholder="VD: Vật tư A" />
+                    
+                    <Label text="{i18n>materialType}" required="true" />
+                    <ComboBox selectedKey="{formModel>/materialForm/MaterialType}">
+                        <items>
+                            <core:Item key="FERT" text="FERT - Finished Product (Thành phẩm)" />
+                            <core:Item key="HAWA" text="HAWA - Trading Goods (Hàng hóa)" />
+                            <core:Item key="ROH" text="ROH - Raw Material (Nguyên liệu)" />
+                            <core:Item key="HALB" text="HALB - Semi-finished (Bán thành phẩm)" />
+                        </items>
+                    </ComboBox>
+                    
+                    <Label text="{i18n>baseUnit}" required="true" />
+                    <ComboBox selectedKey="{formModel>/materialForm/BaseUnit}">
+                        <items>
+                            <core:Item key="PC" text="PC - Piece (Cái/Chiếc)" />
+                            <core:Item key="EA" text="EA - Each (Mỗi cái)" />
+                            <core:Item key="KG" text="KG - Kilogram" />
+                            <core:Item key="M" text="M - Meter (Mét)" />
+                        </items>
+                    </ComboBox>
+
+                    <Label text="{i18n>plant}" required="true" />
+                    <ComboBox id="plantComboBox" selectedKey="{formModel>/materialForm/Plant}" selectionChange="onChangePlant">
+                        <items>
+                            <core:Item key="DL21" text="DL21 - Dallas Manufacturing" />
+                            <core:Item key="DL00" text="DL00 - Global Bike Inc. Main" />
+                            <core:Item key="DL11" text="DL11 - 11 Global US" />
+                        </items>
+                    </ComboBox>
+
+                    <Label text="{i18n>storageLocation}" required="true" />
+                     <ComboBox id="slocComboBox" 
+                        items="{path: 'formModel>/filteredSLocs', templateShareable: false}"
+                        selectedKey="{formModel>/materialForm/StorageLocation}">
+                        <core:Item key="{formModel>key}" text="{formModel>text}" />
+                    </ComboBox>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnSave}" type="Emphasized" press="onSaveMaterial" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnCancel}" press="onCancelCreate" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,61 @@
+<mvc:View controllerName="com.sap341.smartwarehouse.controller.StockList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Page id="stockListPage" title="{i18n>stockListTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <headerContent>
+            <Button id="btnRefreshStock" icon="sap-icon://refresh" press="onRefresh" />
+        </headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                    <HBox>
+                        <SearchField id="searchStockField" width="250px" placeholder="{i18n>materialId}..." search="onSearchStock" />
+                    </HBox>
+                    <HBox>
+                        <Button id="btnGoodsReceipt" text="{i18n>btnGoodsReceipt}" type="Accept" icon="sap-icon://add-product" press="onGoodsReceipt" class="sapUiSmallMarginEnd" />
+                    </HBox>
+                </HBox>
+                <Table id="stockTable" items="{path: '/StockSet'}" growing="true" growingThreshold="20" class="sapUiSmallMarginTop">
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>materialId}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>materialName}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>plant}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>storageLocation}" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="{i18n>quantity}" />
+                        </Column>
+                        <Column hAlign="Center" width="80px">
+                            <Text text="{i18n>baseUnit}" />
+                        </Column>
+                        <Column hAlign="End" width="80px">
+                            <Text text="" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{MaterialId}" />
+                                <Text text="{MaterialName}" />
+                                <Text text="{Plant}" />
+                                <Text text="{StorageLocation}" />
+                                <ObjectNumber number="{path: 'Quantity', type: 'sap.ui.model.type.Float'}" unit="{BaseUnit}" />
+                                <Text text="{BaseUnit}" />
+                                <Button icon="sap-icon://edit" press="onUpdateStock" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,49 @@
+<mvc:View controllerName="com.sap341.smartwarehouse.controller.MaterialList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Page id="materialListPage" title="{i18n>materialListTitle}">
+        <headerContent>
+            <Button id="btnRefresh" icon="sap-icon://refresh" press="onRefresh" />
+        </headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                    <SearchField id="searchField" width="300px" placeholder="{i18n>searchPlaceholder}" search="onSearch" />
+                    <Button id="btnAddMaterial" text="{i18n>btnAddMaterial}" type="Emphasized" icon="sap-icon://add" press="onAddMaterial" />
+                </HBox>
+                <Table id="materialTable" items="{path: '/MaterialSet'}" growing="true" growingThreshold="20" class="sapUiSmallMarginTop">
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>materialId}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>materialName}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>materialType}" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>baseUnit}" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation" press="onViewStock">
+                            <cells>
+                                <Text text="{MaterialId}" />
+                                <Text text="{MaterialName}" />
+                                <Text text="{MaterialType}" />
+                                <Text text="{BaseUnit}" />
+                                <Button icon="sap-icon://BusinessSuiteInAppSymbols/inventory" tooltip="{i18n>btnViewStock}" press="onViewStock" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
