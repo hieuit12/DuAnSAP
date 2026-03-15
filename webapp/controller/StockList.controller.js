@@ -140,21 +140,16 @@ sap.ui.define([
 			var oView = this.getView();
 			var oFormModel = oView.getModel("formModel");
 			
-			// Initial defaults
-			var sDefaultPlant = ""; // Đảm bảo rỗng như yêu cầu nè
-
+			// 1. Initial defaults
 			oFormModel.setProperty("/goodsReceiptForm", {
 				MaterialId: "",
-				Plant: sDefaultPlant,
+				Plant: "",
 				StorageLocation: "",
 				Quantity: 0,
 				PostingDate: new Date(),
 				DocumentDate: new Date(),
 				Remark: ""
 			});
-			
-			// Always clear filtered list on open
-			oFormModel.setProperty("/filteredSLocs", []);
 
 			if (!this._oGRDialog) {
 				Fragment.load({
@@ -167,11 +162,11 @@ sap.ui.define([
 					this._oGRDialog.open();
 					
 					// Apply initial filtering (dấu kho đi)
-					this._updateSLocAndDefault(sDefaultPlant);
+					this._updateSLocAndDefault("");
 				}.bind(this));
 			} else {
 				this._oGRDialog.open();
-				this._updateSLocAndDefault(sDefaultPlant);
+				this._updateSLocAndDefault("");
 			}
 		},
 
@@ -228,34 +223,25 @@ sap.ui.define([
 
 		onChangePlant: function (oEvent) {
 			var sSelectedPlant = oEvent.getSource().getSelectedKey();
-			
-			// Gọi hàm lọc model-driven
-			var sDefaultSLoc = this._updateSLocAndDefault(sSelectedPlant);
-			
-			this.getView().getModel("formModel").setProperty("/goodsReceiptForm/StorageLocation", sDefaultSLoc);
-			
-			if (sSelectedPlant) {
-				MessageToast.show("Đã chọn mặc định kho " + sDefaultSLoc + " cho " + sSelectedPlant);
-			}
+			this._updateSLocAndDefault(sSelectedPlant);
 		},
 
 		_updateSLocAndDefault: function (sPlant) {
-			var oFormModel = this.getView().getModel("formModel");
-			var aAllSLocs = oFormModel.getProperty("/storageLocations") || [];
+			var oSlocComboBox = this.byId("grSLocComboBox");
+			if (!oSlocComboBox) {
+				return;
+			}
 			
-			// Lọc ra danh sách kho mới theo nhà máy
-			var aFilteredSLocs = aAllSLocs.filter(function (item) {
-				return String(item.plant).trim() === String(sPlant).trim();
-			});
-
-			// Cập nhật model mảng riêng để UI ComboBox nó tự động cập nhật
-			oFormModel.setProperty("/filteredSLocs", aFilteredSLocs);
+			var oBinding = oSlocComboBox.getBinding("items");
+			var aFilters = [];
 			
-			// Ép model refresh để chắc chắn UI nhận data mới
-			oFormModel.refresh(true);
+			if (sPlant) {
+				aFilters.push(new Filter("PlantId", FilterOperator.EQ, sPlant));
+			}
 			
-			// Trả về kho đầu tiên làm mặc định
-			return aFilteredSLocs.length > 0 ? aFilteredSLocs[0].key : "";
+			if (oBinding) {
+				oBinding.filter(aFilters);
+			}
 		}
 	});
 });

@@ -67,6 +67,7 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {
+          "defaultBindingMode": "TwoWay",
           "refreshAfterChange": false
         }
       }
@@ -90,8 +91,15 @@
       },
       "routes": [
         {
-          "name": "MaterialList",
+          "name": "Dashboard",
           "pattern": "",
+          "target": [
+            "TargetDashboard"
+          ]
+        },
+        {
+          "name": "MaterialList",
+          "pattern": "materials",
           "target": [
             "TargetMaterialList"
           ]
@@ -102,9 +110,23 @@
           "target": [
             "TargetStockList"
           ]
+        },
+        {
+          "name": "History",
+          "pattern": "history",
+          "target": [
+            "TargetHistory"
+          ]
         }
       ],
       "targets": {
+        "TargetDashboard": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Dashboard",
+          "viewName": "Dashboard"
+        },
         "TargetMaterialList": {
           "viewType": "XML",
           "transition": "slide",
@@ -118,6 +140,13 @@
           "clearControlAggregation": false,
           "viewId": "StockList",
           "viewName": "StockList"
+        },
+        "TargetHistory": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "History",
+          "viewName": "History"
         }
       }
     },

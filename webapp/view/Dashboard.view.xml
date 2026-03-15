@@ -1,0 +1,49 @@
+<mvc:View controllerName="com.sap341.smartwarehouse.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+    <Page title="Dashboard" showHeader="false">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Title text="Warehouse Overview" level="H2" class="sapUiSmallMarginBottom" />
+                <HBox gap="2rem" class="sapUiSmallMarginBottom">
+                    <GenericTile header="Total Materials" subheader="Catalog Size" press="onNavToMaterials" class="tileLayout">
+                        <tileContent>
+                            <TileContent>
+                                <NumericContent value="{TotalMaterials}" icon="sap-icon://product" valueColor="Neutral" />
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    
+                    <GenericTile header="Total Stock" subheader="Items in Warehouse" press="onNavToStock" class="tileLayout">
+                        <tileContent>
+                            <TileContent>
+                                <NumericContent value="{TotalStock}" scale="PCS" icon="sap-icon://inventory" valueColor="Neutral" />
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+
+                    <GenericTile header="Low Stock Alert" subheader="Needs Reorder" press="onNavToStock" class="tileLayout">
+                        <tileContent>
+                            <TileContent footer="Critical">
+                                <NumericContent value="{LowStockCount}" icon="sap-icon://alert" valueColor="Error" />
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                </HBox>
+
+                <layout:VerticalLayout width="100%" class="sapUiMediumMarginTop">
+                    <Title text="Quick Actions" level="H3" class="sapUiSmallMarginBottom" />
+                    <HBox wrap="Wrap" gap="1rem">
+                        <Button text="New Material" type="Emphasized" icon="sap-icon://add" press="onNavToMaterials" />
+                        <Button text="Record Goods Receipt" type="Accept" icon="sap-icon://positive-assets" press="onNavToStock" />
+                        <Button text="View Recent History" type="Ghost" icon="sap-icon://history" press="onNavToHistory" />
+                    </HBox>
+                </layout:VerticalLayout>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

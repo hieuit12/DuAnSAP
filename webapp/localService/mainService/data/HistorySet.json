@@ -1,0 +1,35 @@
+[
+    {
+        "MaterialDocument": "5000000001",
+        "Year": "2026",
+        "PostingDate": "/Date(1710432000000)/",
+        "MaterialId": "MAT001",
+        "MovementType": "501",
+        "BaseUnit": "PCS",
+        "Quantity": 100.0,
+        "Plant": "DL21",
+        "StorageLocation": "0001"
+    },
+    {
+        "MaterialDocument": "5000000002",
+        "Year": "2026",
+        "PostingDate": "/Date(1710435600000)/",
+        "MaterialId": "MAT002",
+        "MovementType": "502",
+        "BaseUnit": "PCS",
+        "Quantity": 10.0,
+        "Plant": "DL21",
+        "StorageLocation": "0002"
+    },
+    {
+        "MaterialDocument": "5000000003",
+        "Year": "2026",
+        "PostingDate": "/Date(1710439200000)/",
+        "MaterialId": "MAT001",
+        "MovementType": "101",
+        "BaseUnit": "PCS",
+        "Quantity": 50.0,
+        "Plant": "DL22",
+        "StorageLocation": "0001"
+    }
+]

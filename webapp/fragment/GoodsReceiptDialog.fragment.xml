@@ -10,19 +10,15 @@
                     <Input value="{formModel>/goodsReceiptForm/MaterialId}" />
                     
                     <Label text="{i18n>plant}" required="true" />
-                    <ComboBox id="grPlantComboBox" selectedKey="{formModel>/goodsReceiptForm/Plant}" selectionChange="onChangePlant">
-                        <items>
-                            <core:Item key="DL21" text="DL21 - Dallas Manufacturing" />
-                            <core:Item key="DL00" text="DL00 - Global Bike Inc. Main" />
-                            <core:Item key="DL11" text="DL11 - 11 Global US" />
-                        </items>
+                    <ComboBox id="grPlantComboBox" items="{/PlantMasterSet}" selectedKey="{formModel>/goodsReceiptForm/Plant}" selectionChange="onChangePlant">
+                        <core:Item key="{PlantId}" text="{PlantId} - {PlantName}" />
                     </ComboBox>
                     
                     <Label text="{i18n>storageLocation}" required="true" />
                     <ComboBox id="grSLocComboBox" 
-                        items="{path: 'formModel>/filteredSLocs', templateShareable: false}"
+                        items="{path: '/StorageLocationMasterSet'}"
                         selectedKey="{formModel>/goodsReceiptForm/StorageLocation}">
-                        <core:Item key="{formModel>key}" text="{formModel>text}" />
+                        <core:Item key="{StorageLocationId}" text="{StorageLocationId} - {StorageLocationName}" />
                     </ComboBox>
                     
                     <Label text="{i18n>quantity}" required="true" />

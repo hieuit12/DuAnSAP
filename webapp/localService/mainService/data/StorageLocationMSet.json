@@ -1,0 +1,6 @@
+[
+    {"PlantId": "DL21", "StorageLocationId": "0001", "StorageLocationName": "Receiving Dock"},
+    {"PlantId": "DL21", "StorageLocationId": "0002", "StorageLocationName": "Bulk Storage"},
+    {"PlantId": "DL22", "StorageLocationId": "0001", "StorageLocationName": "Cold Storage"},
+    {"PlantId": "DL22", "StorageLocationId": "0002", "StorageLocationName": "Hazardous Goods"}
+]
